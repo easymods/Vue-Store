@@ -5,7 +5,7 @@ import Register from '../components/User/Register'
 import Login from '../components/User/Login'
 import Products from '../views/Products'
 import About from '../views/About'
-import Cart from '../views/About'
+import Cart from '../views/Cart'
 import Contacts from '../views/Contacts'
 
 Vue.use(VueRouter)

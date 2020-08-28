@@ -1,7 +1,6 @@
 <template>
     <v-container
-    class="fill-height"
-    fluid
+       class="fill-height"
     >
     <v-row
         align="center"
@@ -10,7 +9,7 @@
         <v-col
         cols="12"
         sm="8"
-        md="5"
+        md="10"
         >
             <v-card class="elevation-12">
                 <v-toolbar
