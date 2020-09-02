@@ -22,16 +22,31 @@
     </v-container>
     
     <!-- PRODUCTS -->
-    <ProductsList />
+    <v-container>
+      <v-layout row>
+        <v-flex xs12>
+            <v-row>
+                <ProductsListItem v-for="product in popular" 
+                :key="product.id"
+                :product="product"
+                />
+            </v-row>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
 <script>
-import ProductsList from '../components/Products/ProductsList'
+import ProductsListItem from '../components/Products/ProductsListItem'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   components: {
-    ProductsList,
+    ProductsListItem
+  },
+  computed: {
+    ...mapGetters(['popular'])
   },
   data: () => ({
     // colors: [
