@@ -54,7 +54,7 @@ const state = {
         color: 'gold',
         material: 'metal',
         description: 'Intel Core i7 8550U 1800 MHz/14"/1920x1080/16Gb/512Gb SSD/DVD нет/Intel HD Graphics 620/Wi-Fi/Bluetooth/Windows 10 Home',
-        price: 1100,
+        price: 17,
         promo: true,
         imageSrc: 'https://images.1a.ee/display/aikido/store/e997954172c5a81f6ab7aff9fea70340.jpg?h=2000&w=2000',
         popular: true
@@ -75,28 +75,38 @@ const state = {
     ],
     vendors: [],
     colors: [],
+    range: [0, 1500],
 }
+
 const mutations = {
     updateVendors (state, value) {
         state.vendors = value
     },
     updateColors (state, value) {
         state.colors = value
-    }
+    },
+    setRange: (state, newValue) => {
+        state.range = newValue
+    },
 }
 const actions = {
-
+    setRange: ({commit, state}, newValue) => {
+        commit('setRange', newValue)
+        // return state.range
+    },
 }
 
 const getters = {
     products: (state) => state.products,
     popular:  (state) => state.products.filter(item => item.popular === true),
-    computedProducts: function () {
+    computedProducts: (state) => {
         return state.products.filter((item) => {
             return (state.colors.length === 0 || state.colors.includes(item.color)) &&
-                (state.vendors.length === 0 || state.vendors.includes(item.vendor))
+                (state.vendors.length === 0 || state.vendors.includes(item.vendor)) &&
+                (item.price >= state.range[0] && item.price <= state.range[1])
         })
     },
+    range: (state) => state.range,
 }
 
 export default  {
