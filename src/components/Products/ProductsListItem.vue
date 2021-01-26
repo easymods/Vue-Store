@@ -56,6 +56,7 @@
         <v-btn
             color="green lighten-2"
             text
+            @click="addedToCart"
         >
             Add To Cart
         </v-btn>
@@ -65,11 +66,19 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
     export default {
         props: ['product'],
         data: () => ({
             
-        })
+        }),
+        methods: {
+            ...mapActions(['addToCart',]),
+            addedToCart() {
+                this.addToCart(this.product);
+            },
+            
+        },
     }
 </script>
 

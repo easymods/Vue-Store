@@ -57,7 +57,5 @@
 </script>
 
 <style scoped>
-.form-width {
-    max-width: 900px;
-}
+
 </style>

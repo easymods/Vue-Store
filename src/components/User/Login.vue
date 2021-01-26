@@ -1,61 +1,65 @@
 <template>
-    <v-container
-    class="fill-height"
-    >
-    <v-row
-        align="center"
-        justify="center"
-    >
-        <v-col
-        cols="12"
-        sm="8"
-        md="10"
-        >
-            <v-card class="elevation-12">
-                <v-toolbar
-                color="green darken-1"
-                dark
-                flat
-                >
-                <v-toolbar-title>Login Form</v-toolbar-title>
-                <v-spacer></v-spacer>
-                </v-toolbar>
-                <v-card-text>
-                <v-form>
-                    <v-text-field
-                    color="green darken-1"
-                    label="Login"
-                    name="login"
-                    prepend-icon="mdi-account"
-                    type="text"
-                    ></v-text-field>
-
-                    <v-text-field
-                    color="green darken-1"
-                    label="Password"
-                    name="password"
-                    prepend-icon="mdi-lock"
-                    type="password"
-                    ></v-text-field>
-
-                </v-form>
-                </v-card-text>
-                <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="green darken-1" dark>Login</v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-col>
-    </v-row>
+    <v-container>
+        <div>
+            <h1 class="mb-5">Login</h1>
+        
+            <ValidationObserver ref="observer" v-slot="{ handleSubmit, reset }">
+            <form @submit.prevent="handleSubmit(onSubmit)">
+            <ValidationProvider v-slot="{ errors }" name="Email" rules="required|email">
+                <v-text-field
+                v-model="email"
+                :error-messages="errors"
+                label="Email"
+                required
+                ></v-text-field>
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }" name="Password" rules="required">
+                <v-text-field type="password"
+                v-model="password"
+                :error-messages="errors"
+                label="Password"
+                ></v-text-field>
+            </ValidationProvider>
+            <v-btn class="mr-4 mt-5" type="submit">submit</v-btn>
+            </form>
+            </ValidationObserver>
+        </div>
     </v-container>
 </template>
 
 <script>
+import { required, email, min, password } from 'vee-validate/dist/rules'
+import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+
+    setInteractionMode('eager')
+
+    extend('required', {
+    ...required,
+    message: '{_field_} can not be empty',
+    })
+
+    extend('email', {
+    ...email,
+    message: 'Email must be valid',
+    })
+
     export default {
-        
+        data: () => ({
+            email: '',
+            password: '',
+        }),
+        components: {
+            ValidationProvider,
+            ValidationObserver,
+        },
+        methods: {
+            onSubmit() {
+                alert('You have logged succesfully')
+            }
+        }
     }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

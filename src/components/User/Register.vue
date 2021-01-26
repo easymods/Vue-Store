@@ -1,64 +1,96 @@
 <template>
-    <v-container
-       class="fill-height"
-    >
-    <v-row
-        align="center"
-        justify="center"
-    >
-        <v-col
-        cols="12"
-        sm="8"
-        md="10"
-        >
-            <v-card class="elevation-12">
-                <v-toolbar
-                color="green darken-1"
-                dark
-                flat
-                >
-                <v-toolbar-title>Register Form</v-toolbar-title>
-                <v-spacer></v-spacer>
-                </v-toolbar>
-                <v-card-text>
-                <v-form>
-                    <v-text-field
-                    color="green darken-1"
-                    label="Login"
-                    name="login"
-                    prepend-icon="mdi-account"
-                    type="text"
-                    ></v-text-field>
-
-                    <v-text-field
-                    color="green darken-1"
-                    label="Password"
-                    name="password"
-                    prepend-icon="mdi-lock"
-                    type="password"
-                    ></v-text-field>
-
-                    <v-text-field
-                    color="green darken-1"
-                    label="Repeat Password"
-                    name="password"
-                    prepend-icon="mdi-repeat"
-                    type="password"
-                    ></v-text-field>
-                </v-form>
-                </v-card-text>
-                <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="green darken-1" dark>Register</v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-col>
-    </v-row>
+    <v-container>
+        <h1 class="mb-5">Register</h1>
+        
+        <ValidationObserver ref="observer" v-slot="{ handleSubmit, reset }">
+        <form @submit.prevent="handleSubmit(onSubmit)">
+        <ValidationProvider v-slot="{ errors }" name="Email" rules="required|email">
+            <v-text-field
+            v-model="email"
+            :error-messages="errors"
+            label="Email"
+            required
+            ></v-text-field>
+        </ValidationProvider>
+        <ValidationObserver>
+            <ValidationProvider v-slot="{ errors }" name="Password" rules="required|min:6">
+                <v-text-field type="password"
+                v-model="password"
+                :error-messages="errors"
+                label="Password"
+                ></v-text-field>
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }" name="repeatPassword" rules="required|password:@Password">
+                <v-text-field type="password"
+                v-model="repeatPassword"
+                :error-messages="errors"
+                label="Repeat Password"
+                ></v-text-field>
+            </ValidationProvider>
+        </ValidationObserver>
+        <div class="mt-5">
+            <v-btn class="mr-4" type="submit">submit</v-btn>
+            <v-btn @click="clear">clear</v-btn>
+        </div>
+        </form>
+        </ValidationObserver>
     </v-container>
 </template>
 
 <script>
+import { required, email, min, password } from 'vee-validate/dist/rules'
+import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+
+    setInteractionMode('eager')
+
+    extend('required', {
+    ...required,
+    message: '{_field_} can not be empty',
+    })
+
+    extend('min', {
+    ...min,
+    message: 'Password may not be less than {length} characters',
+    })
+
+    extend('email', {
+    ...email,
+    message: 'Email must be valid',
+    })
+
+    extend('password', {
+    params: ['target'],
+    validate(value, { target }) {
+        return value === target;
+    },
+    message: 'Password confirmation does not match'
+    });
+
     export default {
-        
+        data: () => ({
+            email: '',
+            password: '',
+            repeatPassword: '',
+        }),
+        components: {
+            ValidationProvider,
+            ValidationObserver,
+        },
+        methods: {
+        onSubmit () {
+            alert('Form has been submitted!');
+        },
+        clear () {
+            this.email = ''
+            this.password = ''
+            this.repeatPassword = ''
+            this.$refs.observer.reset()
+        },
+        },
     }
 </script>
+
+
+<style scoped>
+
+</style>

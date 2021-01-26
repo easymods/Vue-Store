@@ -10,7 +10,8 @@ const state = {
         price: 760,
         promo: false,
         imageSrc: 'https://images.1a.ee/display/aikido/store/4cff799d01d57d07e108f36b64ac0612.jpg?h=2000&w=2000',
-        popular: true
+        popular: true,
+        quantity: 1,
         },
         
 
@@ -24,6 +25,7 @@ const state = {
         promo: true,
         imageSrc: 'https://images.1a.ee/display/aikido/store/a2902448559ee2a242b5c887b25d29c9.jpg?h=2000&w=2000',
         popular: false,
+        quantity: 1,
         },
 
         {id: '3',
@@ -35,7 +37,8 @@ const state = {
         price: 1220,
         promo: true,
         imageSrc: 'https://images.1a.ee/display/aikido/store/7d4adf682b8604a4592e6c517e0a1ede.jpg?h=2000&w=2000',
-        popular: true
+        popular: true,
+        quantity: 1,
         },
 
         {id: '4',
@@ -46,7 +49,9 @@ const state = {
         description: 'Intel Core i7 7700HQ 2800 MHz/17.3"/1920x1080/12Gb/1128Gb HDD+SSD/DVD-RW/NVIDIA GeForce GTX 1060/Wi-Fi/Bluetooth/Windows 10 Home',
         price: 1600,
         promo: false,
-        imageSrc: 'https://images.1a.ee/display/aikido/store/055184dea972e85327ca7f10e8a20ec7.jpg?h=2000&w=2000'},
+        imageSrc: 'https://images.1a.ee/display/aikido/store/055184dea972e85327ca7f10e8a20ec7.jpg?h=2000&w=2000',
+        quantity: 1,
+        },
 
         {id: '5',
         title: 'Acer Swift 5 SF514',
@@ -57,7 +62,8 @@ const state = {
         price: 17,
         promo: true,
         imageSrc: 'https://images.1a.ee/display/aikido/store/e997954172c5a81f6ab7aff9fea70340.jpg?h=2000&w=2000',
-        popular: true
+        popular: true,
+        quantity: 1,
         },
 
 
@@ -70,7 +76,8 @@ const state = {
         price: 980,
         promo: true,
         imageSrc: 'https://images.1a.ee/display/aikido/store/a6305512fc25f7c0aec022449b395a3b.jpg?h=2000&w=2000',
-        popular: true
+        popular: true,
+        quantity: 1,
         },
     ],
     vendors: [],

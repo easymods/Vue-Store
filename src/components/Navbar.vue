@@ -39,9 +39,10 @@
         bordered
         color="green"
         overlap
+        v-if="cart.length >= 1"
       >
         <template v-slot:badge>
-          <p class="bold-badge-counter">6</p>
+          <p class="bold-badge-counter">{{ cart.length }}</p>
         </template>
 
         <v-btn
@@ -72,6 +73,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
     export default {
       data: () => ({
         drawer: false,
@@ -82,7 +84,10 @@
           { name: 'contacts', icon: 'mdi-email', url: '/contacts' },
           { name: 'register', icon: 'mdi-face', url: '/register' },
         ]
-      })
+      }),
+      computed: {
+        ...mapGetters(['cart'])
+      }
     }
 </script>
 
